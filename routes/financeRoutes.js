@@ -146,6 +146,49 @@ router.get('/income', async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /income/{id}:
+ *   put:
+ *     summary: Atualiza uma entrada existente
+ *     tags: [Incomes]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID da entrada a ser atualizada
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               description:
+ *                 type: string
+ *                 description: Descrição da entrada.
+ *               amount:
+ *                 type: number
+ *                 description: Valor da entrada.
+ *     responses:
+ *       200:
+ *         description: Entrada atualizada com sucesso.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                 description:
+ *                   type: string
+ *                 amount:
+ *                   type: number
+ *       400:
+ *         description: Erro ao atualizar a entrada.
+ */
 router.put('/income/:id', async (req, res) => {
   try {
     const incomeRef = db.collection('incomes').doc(req.params.id);
@@ -156,6 +199,41 @@ router.put('/income/:id', async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /income/{id}:
+ *   delete:
+ *     summary: Exclui uma entrada existente
+ *     tags: [Incomes]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID da entrada a ser excluída
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Entrada excluída com sucesso.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Entrada excluída com sucesso
+ *       400:
+ *         description: Erro ao excluir a entrada.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Erro ao excluir a entrada.
+ */
 router.delete('/income/:id', async (req, res) => {
   try {
     await db.collection('incomes').doc(req.params.id).delete();

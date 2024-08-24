@@ -1,5 +1,5 @@
 const express = require('express');
-const { generateMonthlyReport } = require('../controllers/reportController');
+const { generateMonthlyReport } = require('../controllers/reportControllers');
 
 const router = express.Router();
 

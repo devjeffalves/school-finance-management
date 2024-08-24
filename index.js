@@ -1,5 +1,7 @@
 const express = require('express');
 const financeRoutes = require('./routes/financeRoutes');
+const reportRoutes = require('./routes/reportRoutes');
+const totalRoutes = require ('./routes/totalRoutes');
 
 
 const app = express();
@@ -11,6 +13,8 @@ setupSwagger(app);
 
 app.use(express.json());
 app.use('/api', financeRoutes);
+app.use('/api', reportRoutes);
+app.use('/api', totalRoutes);
 
 const PORT = process.env.PORT || 3000;
 
